@@ -1,0 +1,43 @@
+.v-slide {
+  border: 1px solid black;
+  font-size: 40px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  @media (min-width: 600px) {
+    font-size: 80px;
+  }
+
+  @media (min-width: 900px) {
+    font-size: 140px;
+  }
+
+}
+
+.v-slide:nth-child(1) {
+  background: aqua;
+}
+
+.v-slide:nth-child(2) {
+  background: bisque;
+}
+
+.v-slide:nth-child(3) {
+  background: burlywood;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}

@@ -3,26 +3,10 @@
   height: 100%;
 }
 
-.slide-enter-active, .slide-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.slide-enter, .slide-leave-to /* .slide-leave-active в <2.1.8 */ {
-  opacity: 0;
-  transform: translate(-40%, -50%); /* Анимация входа: слайд сдвигается влево */
-}
-
-.slide-out {
-  opacity: 1;
-}
-
-.slide-out-active {
-  opacity: 0;
-  transform: translate(-60%, -50%); /* Анимация выхода: слайд сдвигается влево */
-}
 
 .v-slider-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
