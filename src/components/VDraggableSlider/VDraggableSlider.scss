@@ -1,0 +1,39 @@
+.v-slider_draggable {
+  position: relative;
+  cursor: grab;
+  overflow: hidden;
+  width: 100%;
+}
+
+.v-slider_draggable:before,
+.v-slider_draggable:after {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  content: "";
+  display: block;
+  width: 20px; /* $margin */
+  height: 100%;
+}
+
+.v-slider_draggable:before {
+  left: 0;
+  background: linear-gradient(90deg, #fff, transparent);
+}
+
+.v-slider_draggable:after {
+  right: 0;
+  background: linear-gradient(-90deg, #fff, transparent);
+}
+
+.v-slider-wrapper_draggable {
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  font-size: 0;
+  cursor: pointer;
+}
+
+.v-slider-wrapper_draggable.active {
+  cursor: grabbing;
+}

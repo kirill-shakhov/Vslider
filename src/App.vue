@@ -1,28 +1,23 @@
 <template>
-  <div style="height: 95%">
-    <div class="v-navigation">
-      <button class="v-button" @click="prevSlide">prev</button>
-      <button class="v-button" @click="nextSlide">next</button>
-    </div>
-
-    <vslider :navigation="true">
-      <vslide :id="0" class="v-slide">
-        <h1>text</h1>
-        <p>dsdsd</p>
-      </vslide>
-      <vslide :id="1" class="v-slide">2</vslide>
-      <vslide :id="2" class="v-slide">3</vslide>
-      <vslide :id="3" class="v-slide">4</vslide>
+  <div style="height: 95%; display: flex; align-items: center">
+    <vslider
+        :draggable="true"
+    >
+      <vslide :id="0">1</vslide>
+      <vslide :id="1">2</vslide>
+      <vslide :id="2">3</vslide>
+      <vslide :id="3">4</vslide>
+      <vslide :id="4">5</vslide>
+      <vslide :id="5">6</vslide>
+      <vslide :id="6">7</vslide>
     </vslider>
   </div>
 </template>
 
-<script setup lang= "ts">
+<script setup lang="ts">
 import Vslider from "./components/Vslider/Vslider.vue";
 import Vslide from "./components/Vslide/Vslide.vue";
-import { useVslider } from "./components/Vslider/useVslider.ts";
-
-const { data, move } = useVslider();
+import { VSliderComposables } from "./components/Vslider/vSlider.composables.ts";
 
 interface Props {
   navigation: boolean;
@@ -31,9 +26,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   navigation: false
 });
-
-const prevSlide = () => move(-1);
-const nextSlide = () => move(1);
 
 </script>
 

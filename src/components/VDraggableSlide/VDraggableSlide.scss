@@ -1,0 +1,38 @@
+.v-slide_draggable {
+  display: inline-block;
+  margin-left: 20px; /* $margin */
+  user-select: none;
+  background: tomato;
+  width: 50%;
+  height: 130px;
+  color: #222; /* $bg-color */
+  font-size: 33px;
+  font-weight: bold;
+  line-height: 130px;
+}
+
+.v-slide_draggable:last-child {
+  margin-right: 20px; /* $margin */
+}
+
+@media screen and (min-width: 500px) {
+  .v-slide_draggable {
+    width: 33%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .v-slide_draggable {
+    width: 25%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .wrapper {
+    margin-left: -20px; /* $margin */
+  }
+
+  .v-slide_draggable {
+    width: 20%;
+  }
+}

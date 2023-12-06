@@ -6,9 +6,9 @@
 
 <script setup lang="ts">
 
-import { useVslider } from "../Vslider/useVslider.ts";
+import { VSliderComposables } from "../Vslider/vSlider.composables.ts";
 
-const { data, moveToSLide } = useVslider();
+const { data, moveToSLide } = VSliderComposables();
 interface Props {
   slides: number
 }

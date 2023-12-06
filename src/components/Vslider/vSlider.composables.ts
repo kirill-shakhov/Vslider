@@ -1,23 +1,16 @@
-import { onMounted, reactive } from "vue";
+import { reactive } from "vue";
+import { DataDefaultSlider } from "./vSlider.types.ts";
 
-interface Data {
-    currentIndex: number;
-    activeSlide: number;
-    slidesCount: number;
-    slidesArray: Element[];
-}
-
-const data = reactive<Data>({
+const data = reactive<DataDefaultSlider>({
     currentIndex: 0,
     activeSlide: 0,
     slidesCount: 0, // Изначально устанавливаем slidesCount в 0, так как это значение будет пересчитано в onMounted
     slidesArray: [], // Изначально устанавливаем slidesArray в пустой массив
 });
 
-export function useVslider() {
+export function VSliderComposables() {
 
     function moveToSLide(index) {
-        console.log(`index: ${index}`);
         data.currentIndex = index;
     }
 
@@ -37,9 +30,14 @@ export function useVslider() {
         data.currentIndex = data.activeSlide;
     }
 
+    // добавить статусы через enum
+    //вынести некоторые функции в отдельные файлы
+    // добавить интерфейсы
+    // описать interface Props v-slider
+
     return {
         data,
         move,
-        moveToSLide
+        moveToSLide,
     };
 }
