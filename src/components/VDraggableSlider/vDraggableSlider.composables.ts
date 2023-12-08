@@ -1,7 +1,13 @@
 import { onMounted, reactive } from "vue";
 
-import {DataDraggableSlider, DraggableSliderOptions } from "vDraggableSlider.types.ts";
+import { DataDraggableSlider, DraggableSliderOptions } from "vDraggableSlider.types.ts";
 
+enum SliderStatus {
+    Initial = 'Initial',
+    StartDragging = 'StartDragging',
+    Dragging = 'Dragging',
+    EndDragging = 'EndDragging'
+}
 
 const dataDraggableSlider = reactive<DataDraggableSlider>({
     isDown: false,
@@ -10,15 +16,13 @@ const dataDraggableSlider = reactive<DataDraggableSlider>({
     dist: 0,
     maxDist: 0,
     isMaxDist: false,
-    isGrabbing: false
+    status: SliderStatus.Initial
 })
 
 let slides;
 let slide;
 
-
-
-export function VDraggableSliderComposables():DraggableSliderOptions {
+export function VDraggableSliderComposables(): DraggableSliderOptions {
 
     onMounted(() => {
         slides = document.querySelectorAll('.v-slide_draggable');
@@ -27,8 +31,8 @@ export function VDraggableSliderComposables():DraggableSliderOptions {
 
 
     function startDraggable(e) {
+        dataDraggableSlider.status = SliderStatus.StartDragging
         dataDraggableSlider.isDown = true;
-        dataDraggableSlider.isGrabbing = true;
 
         dataDraggableSlider.startX = e.pageX || e.touches[0].pageX - e.target.offsetLeft;
         dataDraggableSlider.scrollLeft = e.target.scrollLeft;
@@ -37,6 +41,7 @@ export function VDraggableSliderComposables():DraggableSliderOptions {
     function moveDraggable(e) {
         if (!dataDraggableSlider.isDown) return;
 
+        dataDraggableSlider.status = SliderStatus.Dragging
         const x = e.pageX || e.touches[0].pageX - e.target.offsetLeft;
         const deltaX = x - dataDraggableSlider.startX;
 
@@ -94,8 +99,8 @@ export function VDraggableSliderComposables():DraggableSliderOptions {
 
     function endDraggable() {
 
+        dataDraggableSlider.status = SliderStatus.EndDragging
         dataDraggableSlider.isDown = false;
-        dataDraggableSlider.isGrabbing = false;
 
         if (dataDraggableSlider.dist > 0) {
             smoothResetDist(0);
