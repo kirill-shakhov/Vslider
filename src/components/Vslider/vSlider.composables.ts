@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { DataDefaultSlider } from "./vSlider.types.ts";
+import { DataDefaultSlider, DefaultSliderOptions } from "./vSlider.types.ts";
 
 const data = reactive<DataDefaultSlider>({
     currentIndex: 0,
@@ -8,9 +8,9 @@ const data = reactive<DataDefaultSlider>({
     slidesArray: [], // Изначально устанавливаем slidesArray в пустой массив
 });
 
-export function VSliderComposables() {
+export function VSliderComposables():DefaultSliderOptions {
 
-    function moveToSLide(index) {
+    function moveToSLide(index: number) {
         data.currentIndex = index;
     }
 
