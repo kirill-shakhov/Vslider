@@ -8,9 +8,10 @@
       @touchmove.passive="moveDraggable"
       @touchend.prevent="endDraggable"
   >
+    {{ dataDraggableSlider.status }}
     <div
         class="v-slider-wrapper_draggable"
-        :class="{ active: dataDraggableSlider.isGrabbing }"
+        :class="{ active: dataDraggableSlider.status === 'Dragging' }"
         :style="{ transform: `translateX(${dataDraggableSlider.dist}px)` }
       ">
       <slot></slot>
