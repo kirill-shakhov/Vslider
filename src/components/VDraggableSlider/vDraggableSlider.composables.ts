@@ -1,6 +1,6 @@
 import { onMounted, reactive } from "vue";
 
-import {DataDraggableSlider, DraggableSliderFunction } from "vDraggableSlider.types.ts";
+import {DataDraggableSlider, DraggableSliderOptions } from "vDraggableSlider.types.ts";
 
 
 const dataDraggableSlider = reactive<DataDraggableSlider>({
@@ -18,7 +18,7 @@ let slide;
 
 
 
-export function VDraggableSliderComposables():DraggableSliderFunction {
+export function VDraggableSliderComposables():DraggableSliderOptions {
 
     onMounted(() => {
         slides = document.querySelectorAll('.v-slide_draggable');
