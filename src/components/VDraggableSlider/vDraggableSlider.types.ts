@@ -1,7 +1,6 @@
+import { DataSlider } from "../Vslider/vSlider.types.ts";
 
-import {DataSlider} from "../Vslider/vSlider.types.ts";
-
-export interface DataDraggableSlider extends DataSlider{
+export interface DataDraggableSlider extends DataSlider {
     isDown: boolean,
     startX: number,
     scrollLeft: number,
@@ -11,7 +10,7 @@ export interface DataDraggableSlider extends DataSlider{
     isGrabbing: boolean
 }
 
-export interface DraggableSliderFunction {
+export interface DraggableSliderOptions {
     dataDraggableSlider: DataDraggableSlider,
     startDraggable: (event: MouseEvent) => void;
     moveDraggable: (event: MouseEvent) => void;
