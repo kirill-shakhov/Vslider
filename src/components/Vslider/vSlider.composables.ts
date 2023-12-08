@@ -8,23 +8,29 @@ const data = reactive<DataDefaultSlider>({
     slidesArray: [], // Изначально устанавливаем slidesArray в пустой массив
 });
 
-export function VSliderComposables():DefaultSliderOptions {
+export function VSliderComposables(): DefaultSliderOptions {
 
     function moveToSLide(index: number) {
         data.currentIndex = index;
     }
 
     function move(amount: number) {
-        const slidesCount = data.slidesCount;
+        if (!data.slidesCount) return;
 
-        const newIndex = data.activeSlide + amount;
+        const slidesCount: number = data.slidesCount;
+
+        const newIndex: number = data.activeSlide + amount;
 
         if (newIndex >= slidesCount) {
             data.activeSlide = 0;
-        } else if (newIndex < 0) {
-            data.activeSlide = slidesCount - 1;
         } else {
             data.activeSlide = newIndex;
+        }
+
+
+        if (newIndex < 0) {
+            data.activeSlide = slidesCount - 1;
+
         }
 
         data.currentIndex = data.activeSlide;
