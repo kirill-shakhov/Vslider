@@ -7,7 +7,7 @@ export interface DataDraggableSlider extends DataSlider {
     dist: number,
     maxDist: number,
     isMaxDist: boolean,
-    isGrabbing: boolean
+    status?: string
 }
 
 export interface DraggableSliderOptions {
