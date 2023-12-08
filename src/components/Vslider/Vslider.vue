@@ -7,7 +7,6 @@
     </div>
 
     <div class="v-slider-wrapper">
-      {{ props.draggable }}
       <transition-group name="slide-fade">
         <slot></slot>
       </transition-group>
