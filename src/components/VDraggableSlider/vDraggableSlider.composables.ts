@@ -1,6 +1,7 @@
 import { onMounted, reactive } from "vue";
 
 import { DataDraggableSlider, DraggableSliderOptions } from "vDraggableSlider.types.ts";
+import { isElementInViewport } from "../../utils/isElementInViewport/isElementInViewport.ts";
 
 enum SliderStatus {
     Initial = 'Initial',
@@ -16,21 +17,24 @@ const dataDraggableSlider = reactive<DataDraggableSlider>({
     dist: 0,
     maxDist: 0,
     isMaxDist: false,
-    status: SliderStatus.Initial
+    status: SliderStatus.Initial,
+    slides: null,
+    slide: null
 })
 
-let slides;
-let slide;
+// Правильно занести их в dataDraggableSlider
+
+// Правильно занести их в dataDraggableSlider
 
 export function VDraggableSliderComposables(): DraggableSliderOptions {
 
     onMounted(() => {
-        slides = document.querySelectorAll('.v-slide_draggable');
-        slide = slides[slides.length - 1];
+        dataDraggableSlider.slides = document.querySelectorAll('.v-slide_draggable');
+        dataDraggableSlider.slide = dataDraggableSlider.slides[dataDraggableSlider.slides.length - 1];
     })
 
 
-    function startDraggable(e) {
+    function startDraggable(e):void {
         dataDraggableSlider.status = SliderStatus.StartDragging
         dataDraggableSlider.isDown = true;
 
@@ -38,7 +42,7 @@ export function VDraggableSliderComposables(): DraggableSliderOptions {
         dataDraggableSlider.scrollLeft = e.target.scrollLeft;
     }
 
-    function moveDraggable(e) {
+    function moveDraggable(e):void {
         if (!dataDraggableSlider.isDown) return;
 
         dataDraggableSlider.status = SliderStatus.Dragging
@@ -51,7 +55,7 @@ export function VDraggableSliderComposables(): DraggableSliderOptions {
         // Устанавливаем startX для следующего перемещения
         dataDraggableSlider.startX = x;
 
-        if (isElementInViewport(slide) && !dataDraggableSlider.isMaxDist) {
+        if (isElementInViewport(dataDraggableSlider.slide) && !dataDraggableSlider.isMaxDist) {
             console.log('Элемент виден в текущей области видимости экрана');
             // Сохраняем начальное значение maxDist
             dataDraggableSlider.maxDist = dataDraggableSlider.dist;
@@ -65,19 +69,9 @@ export function VDraggableSliderComposables(): DraggableSliderOptions {
 
     }
 
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
 
     function smoothResetDist(targetDist: number, callback?: () => void) {
         const step = 10; // Регулируйте шаг анимации
-        console.log('start');
 
         function animate() {
             if (dataDraggableSlider.dist > targetDist) {
@@ -97,7 +91,7 @@ export function VDraggableSliderComposables(): DraggableSliderOptions {
     }
 
 
-    function endDraggable() {
+    function endDraggable(): void {
 
         dataDraggableSlider.status = SliderStatus.EndDragging
         dataDraggableSlider.isDown = false;
@@ -129,5 +123,5 @@ export function VDraggableSliderComposables(): DraggableSliderOptions {
         startDraggable,
         moveDraggable,
         endDraggable
-    };
+    } as DraggableSliderOptions
 }
