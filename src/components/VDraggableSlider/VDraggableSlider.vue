@@ -15,22 +15,26 @@
         :style="{ transform: `translateX(${dataDraggableSlider.dist}px)` }
       ">
       <slot></slot>
+
+      <template v-if="duplicatedContent">
+        <component :is="duplicatedContent"></component>
+      </template>
     </div>
   </div>
 
   <div style="position: fixed; top: 0; left: 0">
     <div>dist: {{ dataDraggableSlider.dist }}</div>
-    {{ screen }}
     <div>
       maxDist: {{ dataDraggableSlider.maxDist }}
+
     </div>
-    dataDraggableSlider: {{ dataDraggableSlider.isGrabbing }}
   </div>
 </template>
 
 <script setup lang="ts">
 
 import { VDraggableSliderComposables } from "./vDraggableSlider.composables.ts";
+import { h, onMounted, Ref, ref, useSlots } from 'vue';
 
 const {
   dataDraggableSlider,
@@ -39,9 +43,18 @@ const {
   endDraggable,
 } = VDraggableSliderComposables();
 
-let screen = window.innerWidth;
+const slots = useSlots();
+const duplicatedContent: Ref<null | (() => any[])> = ref(null);
+
+
+onMounted(() => {
+  if (slots.default) {
+    const slotContents = slots.default();
+    duplicatedContent.value = () => slotContents.map(node => h(node));
+  }
+});
 </script>
 
 <style lang="scss">
-  @import "VDraggableSlider";
+@import "VDraggableSlider";
 </style>
