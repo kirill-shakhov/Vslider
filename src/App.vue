@@ -1,17 +1,17 @@
 <template>
-  <div style="height: 95%; display: flex; align-items: center">
-    <vslider
-        :draggable="false"
-    >
-      <vslide :id="0">1</vslide>
-      <vslide :id="1">2</vslide>
-      <vslide :id="2">3</vslide>
-      <vslide :id="3">4</vslide>
-      <vslide :id="4">5</vslide>
-      <vslide :id="5">6</vslide>
-      <vslide :id="6">7</vslide>
-    </vslider>
-  </div>
+<!--    <div style="height: 95%; display: flex; align-items: center">-->
+<!--      <vslider-->
+<!--          :draggable="false"-->
+<!--      >-->
+<!--        <vslide :id="0">1</vslide>-->
+<!--        <vslide :id="1">2</vslide>-->
+<!--        <vslide :id="2">3</vslide>-->
+<!--        <vslide :id="3">4</vslide>-->
+<!--        <vslide :id="4">5</vslide>-->
+<!--        <vslide :id="5">6</vslide>-->
+<!--        <vslide :id="6">7</vslide>-->
+<!--      </vslider>-->
+<!--    </div>-->
 
   <div style="height: 95%; display: flex; align-items: center">
     <vslider
@@ -26,12 +26,13 @@
       <vslide :id="6">7</vslide>
     </vslider>
   </div>
+
 </template>
 
 <script setup lang="ts">
 import Vslider from "./components/Vslider/Vslider.vue";
 import Vslide from "./components/Vslide/Vslide.vue";
-import { VSliderComposables } from "./components/Vslider/vSlider.composables.ts";
+import { ref } from "vue";
 
 interface Props {
   navigation: boolean;
