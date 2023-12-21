@@ -7,7 +7,9 @@ export interface DataDraggableSlider extends DataSlider {
     dist: number,
     maxDist: number,
     isMaxDist: boolean,
-    status?: string
+    status?: string,
+    slides: NodeListOf<Element> | null;
+    slide: Element | null;
 }
 
 export interface DraggableSliderOptions {
